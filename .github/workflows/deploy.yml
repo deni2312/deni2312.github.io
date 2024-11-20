@@ -44,6 +44,12 @@ jobs:
           name: production-files
           path: ./dist
 
+      - name: Copy CNAME from main branch
+        run: |
+          git fetch origin main
+          git checkout origin/main -- CNAME
+          mv CNAME ./dist
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
