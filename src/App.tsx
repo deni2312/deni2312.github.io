@@ -26,6 +26,7 @@ export default function App() {
         <Routes>
           <Route path="/deni2312.github.io/" element={<Site />} />
           <Route path="/deni2312.github.io/articles" element={<ArticlesPage />} />
+          <Route path="*" element={<Site />} />
         </Routes>
       </div>
     </Router>
