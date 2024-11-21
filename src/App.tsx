@@ -14,10 +14,10 @@ export default function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/deni2312.github.io/">Home</Link>
             </li>
             <li>
-              <Link to="/articles">About</Link>
+              <Link to="/deni2312.github.io/articles">About</Link>
             </li>
           </ul>
         </nav>
