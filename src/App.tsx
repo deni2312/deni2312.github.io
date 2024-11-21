@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Site from "./Site";
 import ArticlesPage from "./ArticlesPage";
+import ClusteredRenderingPage from "./articles/ClusteredRendering";
 
 export default function App() {
   return (
@@ -34,6 +35,10 @@ export default function App() {
           <Routes>
             <Route path="/deni2312.github.io/" element={<Site />} />
             <Route path="/deni2312.github.io/articles" element={<ArticlesPage />} />
+            <Route
+              path="/deni2312.github.io/articles/clustered-rendering"
+              element={<ClusteredRenderingPage />}
+            />
             <Route path="*" element={<Site />} />
           </Routes>
         </main>
