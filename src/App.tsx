@@ -14,7 +14,7 @@ export default function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home1</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
               <Link to="/articles">About</Link>
@@ -24,8 +24,8 @@ export default function App() {
 
         {/* Use Routes and Route with the element prop */}
         <Routes>
-          <Route path="/" element={<Site />} />
-          <Route path="/articles" element={<ArticlesPage />} />
+          <Route path="/deni2312.github.io/" element={<Site />} />
+          <Route path="/deni2312.github.io/articles" element={<ArticlesPage />} />
         </Routes>
       </div>
     </Router>
