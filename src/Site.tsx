@@ -1,5 +1,6 @@
 import telegram from './assets/telegram.svg';
 import chatgpt from './assets/chatgpt.png';
+import { Link } from 'react-router-dom';
 
 function Site() {
   return (
@@ -25,6 +26,14 @@ function Site() {
             You can also check out my GitHub for other projects, including work with the Telegram API and ChatGPT integrations, all written in my favorite language, C++.
             I'm also highly proficient in languages like Java, Python, and TypeScript, working with frameworks such as Angular, React, and Three.js. I have experience in mobile development using Flutter, as well as expertise in Docker and setting up CI/CD pipelines.
           </p>
+            <div className="text-center mt-8">
+            <Link
+                to="/deni2312.github.io/articles"
+                className="inline-block bg-gradient-to-r from-purple-500 to-blue-500 py-2 px-6 rounded-lg text-white font-semibold mt-4"
+              >
+                Read My Articles
+              </Link>
+          </div>
         </div>
       </section>
 
