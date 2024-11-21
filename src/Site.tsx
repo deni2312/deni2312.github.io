@@ -129,13 +129,6 @@ function Site() {
           </form>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-4 bg-gray-700 text-center">
-        <p className="text-sm text-gray-400">
-          © 2024 Denis Beqiraj. All rights reserved.
-        </p>
-      </footer>
     </div>
   );
 }
