@@ -31,7 +31,7 @@ const SetupSection: React.FC = () => (
     <div className="container mx-auto px-4">
       <h2 className="text-3xl font-bold text-center mb-10">Setup</h2>
       <ul className="text-lg text-gray-300 list-disc pl-10 space-y-4">
-        <li><strong>5 SSBOs:</strong> One for instance and model data, another for a copy of this data, one for mesh extents and center, another for camera data, and the last for model data.</li>
+        <li><strong>SSBOs:</strong> One for instance and model data, another for a copy of this data, one for mesh extents and center, another for camera data, and the last for model data.</li>
         <li><strong>Atomic Counter:</strong> Used to count the instances to draw and bind.</li>
         <li><strong>GLMultiDrawIndirectCount:</strong> Uses the atomic counter for efficient drawing.</li>
       </ul>
