@@ -211,7 +211,9 @@ layout(binding = 0) uniform atomic_uint counterSize;
     }
     return true;
 }
-`}),p.jsx("p",{className:"mt-4",children:"The main will check and add to the atomic counter the data:"}),p.jsx("pre",{className:"bg-gray-700 p-4 rounded-md text-white",children:`    uint index = gl_GlobalInvocationID.x;
+`}),p.jsx("p",{className:"mt-4",children:"The main will check and add to the atomic counter the data:"}),p.jsx("pre",{className:"bg-gray-700 p-4 rounded-md text-white",children:`int main(){
+
+    uint index = gl_GlobalInvocationID.x;
 
     // Compute the view-projection matrix
     mat4 viewProjection = projection * view;
@@ -225,12 +227,13 @@ layout(binding = 0) uniform atomic_uint counterSize;
         // Copy data
         instanceData[culledIdx] = instanceDataCopy[index];
     }
+}
 
-`})]})}),Lm=()=>p.jsx("section",{className:"py-20 bg-gray-800",children:p.jsxs("div",{className:"container mx-auto px-4",children:[p.jsx("h2",{className:"text-3xl font-bold text-center mb-10",children:"Rendering"}),p.jsxs("p",{className:"mt-4",children:["Rendering with ",p.jsx("code",{children:"GlMultidrawIndirectCount"})," is done as follows:"]}),p.jsx("pre",{className:"bg-gray-700 p-4 rounded-md text-white",children:`        m_vao->bind();
-		glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDraw);
-		glBindBuffer(GL_PARAMETER_BUFFER_ARB, m_sizeAtomic);
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_indirectSSBOId, m_indirectDraw);
-		glMultiDrawElementsIndirectCountARB(GL_TRIANGLES, GL_UNSIGNED_INT, nullptr, 0, m_drawCommands.size(), 0);
-		glBindBuffer(GL_PARAMETER_BUFFER_ARB, 0);
-		glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
+`})]})}),Lm=()=>p.jsx("section",{className:"py-20 bg-gray-800",children:p.jsxs("div",{className:"container mx-auto px-4",children:[p.jsx("h2",{className:"text-3xl font-bold text-center mb-10",children:"Rendering"}),p.jsxs("p",{className:"mt-4",children:["Rendering with ",p.jsx("code",{children:"GlMultidrawIndirectCount"})," is done as follows:"]}),p.jsx("pre",{className:"bg-gray-700 p-4 rounded-md text-white",children:`m_vao->bind();
+glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDraw);
+glBindBuffer(GL_PARAMETER_BUFFER_ARB, m_sizeAtomic);
+glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_indirectSSBOId, m_indirectDraw);
+glMultiDrawElementsIndirectCountARB(GL_TRIANGLES, GL_UNSIGNED_INT, nullptr, 0, m_drawCommands.size(), 0);
+glBindBuffer(GL_PARAMETER_BUFFER_ARB, 0);
+glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
         `})]})}),Im=()=>p.jsxs("div",{className:"min-h-screen bg-gray-900 text-white font-sans",children:[p.jsx(Pm,{}),p.jsx(Rm,{}),p.jsx(Tm,{}),p.jsx(zm,{}),p.jsx(Lm,{})]});function Om(){return p.jsx(xm,{children:p.jsxs("div",{className:"min-h-screen bg-gray-900 text-white",children:[p.jsx("header",{className:"bg-gray-800 py-4",children:p.jsxs("nav",{className:"container mx-auto px-4 flex justify-between items-center",children:[p.jsx("h1",{className:"text-lg font-bold text-white",children:"My Portfolio"}),p.jsxs("ul",{className:"flex space-x-4",children:[p.jsx("li",{children:p.jsx(Nt,{to:"/deni2312.github.io/",className:"text-gray-300 hover:text-white",children:"Home"})}),p.jsx("li",{children:p.jsx(Nt,{to:"/deni2312.github.io/articles",className:"text-gray-300 hover:text-white",children:"Articles"})})]})]})}),p.jsx("main",{children:p.jsxs(fm,{children:[p.jsx(At,{path:"/deni2312.github.io/",element:p.jsx(xs,{})}),p.jsx(At,{path:"/deni2312.github.io/articles",element:p.jsx(Nm,{})}),p.jsx(At,{path:"/deni2312.github.io/articles/clustered-rendering",element:p.jsx(jm,{})}),p.jsx(At,{path:"/deni2312.github.io/articles/culling",element:p.jsx(Im,{})}),p.jsx(At,{path:"*",element:p.jsx(xs,{})})]})}),p.jsx("footer",{className:"py-4 bg-gray-700 text-center",children:p.jsx("p",{className:"text-sm text-gray-400",children:"© 2024 Denis Beqiraj. All rights reserved."})})]})})}Lc(document.getElementById("root")).render(p.jsx(_.StrictMode,{children:p.jsx(Om,{})}));
