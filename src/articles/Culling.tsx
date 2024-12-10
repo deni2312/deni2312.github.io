@@ -30,29 +30,48 @@ const SetupSection: React.FC = () => (
   <section className="py-20 bg-gray-800">
     <div className="container mx-auto px-4">
       <h2 className="text-3xl font-bold text-center mb-10">Setup</h2>
-      <ul className="text-lg text-gray-300 list-disc pl-10 space-y-4">
-        <li><strong>SSBOs:</strong> One for instance and model data, another for a copy of this data, one for mesh extents and center, another for camera data, and the last for model data.</li>
-        <li><strong>Atomic Counter:</strong> Used to count the instances to draw and bind.</li>
-        <li><strong>GLMultiDrawIndirectCount:</strong> Uses the atomic counter for efficient drawing.</li>
-      </ul>
-      <p className="mt-4">Below is the code to create the necessary multidraw indirect buffers and the atomic counter:</p>
-      <pre className="bg-gray-700 p-4 rounded-md text-white">
-        {`glGenBuffers(1, &m_indirectDraw);
+  <p className="mt-4">
+    1. Generate the necessary buffer objects: The following code creates three buffers:
+    <ul>
+      <li><strong>m_indirectDraw</strong>: Stores draw commands.</li>
+      <li><strong>m_indirectDrawCopy</strong>: Used for secondary operations or modifications.</li>
+      <li><strong>m_sizeAtomic</strong>: An atomic counter buffer for dynamic tracking.</li>
+    </ul>
+  </p>
+  <pre className="bg-gray-700 p-4 rounded-md text-white">
+    {`glGenBuffers(1, &m_indirectDraw);
 glGenBuffers(1, &m_indirectDrawCopy);
-glGenBuffers(1, &m_sizeAtomic);
-glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, m_sizeAtomic);
+glGenBuffers(1, &m_sizeAtomic);`}
+  </pre>
+
+  <p className="mt-4">
+    2. Configure the atomic counter buffer: This buffer is bound to the <strong>GL_ATOMIC_COUNTER_BUFFER</strong> target and linked to binding point 0. The buffer size is set to hold one unsigned integer.
+  </p>
+  <pre className="bg-gray-700 p-4 rounded-md text-white">
+    {`glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, m_sizeAtomic);
 glBindBufferBase(GL_ATOMIC_COUNTER_BUFFER, 0, m_sizeAtomic);
 glBufferData(GL_ATOMIC_COUNTER_BUFFER, sizeof(unsigned int), NULL, GL_DYNAMIC_DRAW);
-glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, 0);
+glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, 0);`}
+  </pre>
 
-// BIND INDIRECT DRAW BUFFER AND SET OFFSETS
-glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDrawCopy);
+  <p className="mt-4">
+    3. Bind and configure the indirect draw copy buffer: This prepares the buffer to store draw commands with offsets. The offsets are calculated in the next step.
+  </p>
+  <pre className="bg-gray-700 p-4 rounded-md text-white">
+    {`glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDrawCopy);`}
+  </pre>
 
-m_currentIndex = 0;
+  <p className="mt-4">
+    4. Initialize the draw commands: Each mesh is processed to create a draw command, which specifies the number of indices, instance count, and vertex offsets for rendering. These commands are stored in a vector.
+  </p>
+  <pre className="bg-gray-700 p-4 rounded-md text-white">
+    {`m_currentIndex = 0;
 m_currentVertex = 0;
+
 for (const auto& mesh : meshes) {
     const auto& indices = mesh->verticesData().indices;
     const auto& vertices = mesh->verticesData().vertices;
+
     DrawElementsIndirectCommand command{};
     command.count = static_cast<GLuint>(indices.size());
     command.instanceCount = mesh->visible();
@@ -63,22 +82,23 @@ for (const auto& mesh : meshes) {
     m_drawCommands.push_back(command);
     m_currentIndex += indices.size();
     m_currentVertex += vertices.size();
-}
+}`}
+  </pre>
 
-glBindBuffer(GL_ARRAY_BUFFER, m_indirectDrawCopy);
+  <p className="mt-4">
+    5. Upload draw commands to buffers: The commands are uploaded to both the copy buffer and the primary indirect draw buffer for use in rendering.
+  </p>
+  <pre className="bg-gray-700 p-4 rounded-md text-white">
+    {`glBindBuffer(GL_ARRAY_BUFFER, m_indirectDrawCopy);
 glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_indirectCopySSBOId, m_indirectDrawCopy);
-
-// Upload the draw commands to the buffer
 glBufferData(GL_DRAW_INDIRECT_BUFFER, m_drawCommands.size() * sizeof(DrawElementsIndirectCommand), m_drawCommands.data(), GL_DYNAMIC_DRAW);
 
-// Upload the draw commands to the buffer for indirect draw
 glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDraw);
 glBindBuffer(GL_ARRAY_BUFFER, m_indirectDraw);
 glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_indirectSSBOId, m_indirectDraw);
-glBufferData(GL_DRAW_INDIRECT_BUFFER, m_drawCommands.size() * sizeof(DrawElementsIndirectCommand), nullptr, GL_DYNAMIC_DRAW);
-`}
-      </pre>
-    </div>
+glBufferData(GL_DRAW_INDIRECT_BUFFER, m_drawCommands.size() * sizeof(DrawElementsIndirectCommand), nullptr, GL_DYNAMIC_DRAW);`}
+  </pre>
+</div>
   </section>
 );
 
@@ -244,12 +264,35 @@ layout(binding = 0) uniform atomic_uint counterSize;
   </section>
 );
 
+const RenderingSection: React.FC = () => (
+  <section className="py-20 bg-gray-800">
+    <div className="container mx-auto px-4">
+      <h2 className="text-3xl font-bold text-center mb-10">Rendering</h2>
+      <p className="mt-4">
+        Rendering with <code>GlMultidrawIndirectCount</code> is done as follows:
+      </p>
+      <pre className="bg-gray-700 p-4 rounded-md text-white">
+      {`        m_vao->bind();
+		glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDraw);
+		glBindBuffer(GL_PARAMETER_BUFFER_ARB, m_sizeAtomic);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_indirectSSBOId, m_indirectDraw);
+		glMultiDrawElementsIndirectCountARB(GL_TRIANGLES, GL_UNSIGNED_INT, nullptr, 0, m_drawCommands.size(), 0);
+		glBindBuffer(GL_PARAMETER_BUFFER_ARB, 0);
+		glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
+        `}
+
+      </pre>
+    </div>
+  </section>
+);
+
 const CullingPage: React.FC = () => (
   <div className="min-h-screen bg-gray-900 text-white font-sans">
     <Header />
     <RenderingPipeline />
     <SetupSection />
     <ComputeShaderSection />
+    <RenderingSection/>
   </div>
 );
 
