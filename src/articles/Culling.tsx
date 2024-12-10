@@ -248,7 +248,9 @@ layout(binding = 0) uniform atomic_uint counterSize;
       </pre>
       <p className="mt-4">The main will check and add to the atomic counter the data:</p>
       <pre className="bg-gray-700 p-4 rounded-md text-white">
-        {`    uint index = gl_GlobalInvocationID.x;
+        {`int main(){
+
+    uint index = gl_GlobalInvocationID.x;
 
     // Compute the view-projection matrix
     mat4 viewProjection = projection * view;
@@ -262,6 +264,7 @@ layout(binding = 0) uniform atomic_uint counterSize;
         // Copy data
         instanceData[culledIdx] = instanceDataCopy[index];
     }
+}
 
 `}
 
@@ -278,13 +281,13 @@ const RenderingSection: React.FC = () => (
         Rendering with <code>GlMultidrawIndirectCount</code> is done as follows:
       </p>
       <pre className="bg-gray-700 p-4 rounded-md text-white">
-      {`        m_vao->bind();
-		glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDraw);
-		glBindBuffer(GL_PARAMETER_BUFFER_ARB, m_sizeAtomic);
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_indirectSSBOId, m_indirectDraw);
-		glMultiDrawElementsIndirectCountARB(GL_TRIANGLES, GL_UNSIGNED_INT, nullptr, 0, m_drawCommands.size(), 0);
-		glBindBuffer(GL_PARAMETER_BUFFER_ARB, 0);
-		glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
+{`m_vao->bind();
+glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDraw);
+glBindBuffer(GL_PARAMETER_BUFFER_ARB, m_sizeAtomic);
+glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_indirectSSBOId, m_indirectDraw);
+glMultiDrawElementsIndirectCountARB(GL_TRIANGLES, GL_UNSIGNED_INT, nullptr, 0, m_drawCommands.size(), 0);
+glBindBuffer(GL_PARAMETER_BUFFER_ARB, 0);
+glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
         `}
 
       </pre>
