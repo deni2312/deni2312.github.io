@@ -1,4 +1,5 @@
 import React from "react";
+import culling from '../assets/culling.png'
 
 const Header: React.FC = () => (
   <header className="bg-gradient-to-r from-green-500 to-blue-500 py-20">
@@ -9,6 +10,23 @@ const Header: React.FC = () => (
       </p>
     </div>
   </header>
+);
+
+// New section for displaying the image (frustum.png)
+const FrustumImageSection: React.FC = () => (
+  <section className="py-20 bg-gray-800">
+    <div className="container mx-auto px-4 text-center">
+      <h2 className="text-3xl font-bold text-center mb-10">Prisma Engine: Frustum Culling</h2>
+      <p className="text-lg text-gray-300 mb-8">
+        This image provides a visual overview of frustum culling in Prisma Engine:
+      </p>
+      <img
+      src={culling}
+      alt="Frustum Culling"
+      className="rounded-lg mb-4 object-contain max-w-4xl mx-auto"
+    />
+    </div>
+  </section>
 );
 
 const RenderingPipeline: React.FC = () => (
@@ -298,6 +316,7 @@ glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
 const CullingPage: React.FC = () => (
   <div className="min-h-screen bg-gray-900 text-white font-sans">
     <Header />
+    <FrustumImageSection/>
     <RenderingPipeline />
     <SetupSection />
     <ComputeShaderSection />
