@@ -27,17 +27,21 @@ const RenderingPipeline: React.FC = () => (
 );
 
 const SetupSection: React.FC = () => (
-  <section className="py-20 bg-gray-800">
-    <div className="container mx-auto px-4">
-      <h2 className="text-3xl font-bold text-center mb-10">Setup</h2>
-  <p className="mt-4">
-    1. Generate the necessary buffer objects: The following code creates three buffers:
-    <ul>
-      <li><strong>m_indirectDraw</strong>: Stores draw commands.</li>
-      <li><strong>m_indirectDrawCopy</strong>: Used for secondary operations or modifications.</li>
-      <li><strong>m_sizeAtomic</strong>: An atomic counter buffer for dynamic tracking.</li>
+<section className="py-20 bg-gray-800">
+  <div className="container mx-auto px-4">
+    <h2 className="text-3xl font-bold text-center mb-10">Setup</h2>
+    <p className="mt-4">1. Generate the necessary buffer objects:</p>
+    <ul className="list-disc list-inside mt-4 space-y-2 text-gray-300">
+      <li>
+        <strong>m_indirectDraw:</strong> Stores draw commands.
+      </li>
+      <li>
+        <strong>m_indirectDrawCopy:</strong> Used as a copy of the instances of the scene.
+      </li>
+      <li>
+        <strong>m_sizeAtomic:</strong> An atomic counter buffer for dynamic tracking of culled meshes.
+      </li>
     </ul>
-  </p>
   <pre className="bg-gray-700 p-4 rounded-md text-white">
     {`glGenBuffers(1, &m_indirectDraw);
 glGenBuffers(1, &m_indirectDrawCopy);
@@ -45,8 +49,10 @@ glGenBuffers(1, &m_sizeAtomic);`}
   </pre>
 
   <p className="mt-4">
-    2. Configure the atomic counter buffer: This buffer is bound to the <strong>GL_ATOMIC_COUNTER_BUFFER</strong> target and linked to binding point 0. The buffer size is set to hold one unsigned integer.
+    2. Configure the atomic counter buffer: This buffer is bound to the GL_ATOMIC_COUNTER_BUFFER target and linked to binding point 0. The buffer size is set to hold one unsigned integer.
   </p>
+
+
   <pre className="bg-gray-700 p-4 rounded-md text-white">
     {`glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, m_sizeAtomic);
 glBindBufferBase(GL_ATOMIC_COUNTER_BUFFER, 0, m_sizeAtomic);
