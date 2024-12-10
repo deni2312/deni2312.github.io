@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Site from "./Site";
 import ArticlesPage from "./ArticlesPage";
 import ClusteredRenderingPage from "./articles/ClusteredRendering";
+import CullingPage from "./articles/Culling";
 
 export default function App() {
   return (
@@ -38,6 +39,10 @@ export default function App() {
             <Route
               path="/deni2312.github.io/articles/clustered-rendering"
               element={<ClusteredRenderingPage />}
+            />
+            <Route
+              path="/deni2312.github.io/articles/culling"
+              element={<CullingPage />}
             />
             <Route path="*" element={<Site />} />
           </Routes>
