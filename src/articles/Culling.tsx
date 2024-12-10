@@ -19,7 +19,7 @@ const RenderingPipeline: React.FC = () => (
         In my engine, I utilize <code>glMultiDrawIndirect</code> to minimize CPU overhead by offloading the work to the GPU. When implementing frustum culling, two approaches can be used:
         <ol className="list-decimal pl-8 mt-4">
           <li>The less efficient method sets <code>.instanceCount</code> to 0.</li>
-          <li>The more efficient approach, which I have chosen, utilizes an atomic counter to track the number of instances to draw and <code>glMultiDrawIndirectCount</code>.</li>
+          <li>The more efficient approach, which I have chosen, utilizes an atomic counter to track the number of instances to draw and uses <code>glMultiDrawIndirectCount</code>.</li>
         </ol>
       </p>
     </div>
@@ -162,7 +162,7 @@ layout(std430, binding = 4) buffer AABBData {
 layout(binding = 0) uniform atomic_uint counterSize;
 `}
       </pre>
-      <p className="mt-4">After gathering the data, the AABB transform function is applied:</p>
+      <p className="mt-4">After gathering the data, the AABB transform function that makes the AABB data from local to model space is applied:</p>
       <pre className="bg-gray-700 p-4 rounded-md text-white">
         {`AABB transformAABB(AABB localAABB, mat4 modelMatrix) {
     vec3 worldCenter = vec3(modelMatrix * localAABB.center);
@@ -178,7 +178,7 @@ layout(binding = 0) uniform atomic_uint counterSize;
 }
 `}
       </pre>
-      <p className="mt-4">The frustum check function follows:</p>
+      <p className="mt-4">The frustum check function works as follows: First, we retrieve the plane normals. For each plane, we calculate the distance from the center, considering the projected radius. We then verify whether the point is within the frustum by ensuring it is not outside the projected bounds. Here's the code snippet:</p>
       <pre className="bg-gray-700 p-4 rounded-md text-white">
         {`bool isAABBInFrustum(mat4 viewProjection, AABB worldAABB) {
     vec3 absExtents = worldAABB.extents.xyz;
