@@ -2,14 +2,14 @@ import React from "react";
 import culling from '../assets/culling.png'
 
 const Header: React.FC = () => (
-  <header className="bg-gradient-to-r from-green-500 to-blue-500 py-20">
-    <div className="container mx-auto px-4 text-center">
-      <h1 className="text-4xl md:text-6xl font-bold">Frustum Culling</h1>
-      <p className="mt-4 text-lg md:text-2xl">
-        Frustum culling is a 3D graphics optimization technique that discards objects outside the camera's view frustum. This reduces unnecessary computational load by rendering only visible objects.
-      </p>
-    </div>
-  </header>
+  <section className="min-h-[calc(100vh-3.25rem)] bg-gradient-to-r from-green-500 to-blue-500 py-20 flex items-center">
+  <div className="container mx-auto px-4 text-center">
+    <h1 className="text-4xl md:text-6xl font-bold">Frustum Culling</h1>
+    <p className="mt-4 text-lg md:text-2xl">
+    Frustum culling is a 3D graphics optimization technique that discards objects outside the camera's view frustum. This reduces unnecessary computational load by rendering only visible objects.
+    </p>
+  </div>
+</section>
 );
 
 // New section for displaying the image (frustum.png)
@@ -21,10 +21,10 @@ const FrustumImageSection: React.FC = () => (
         This image provides a visual overview of frustum culling in Prisma Engine:
       </p>
       <img
-      src={culling}
-      alt="Frustum Culling"
-      className="rounded-lg mb-4 object-contain max-w-4xl mx-auto"
-    />
+          src={culling}
+          alt="Frustum Culling"
+          className="rounded-lg mb-4 object-contain max-w-full mx-auto"
+        />
     </div>
   </section>
 );
