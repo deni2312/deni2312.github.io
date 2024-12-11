@@ -340,6 +340,7 @@ export default function CullingPage()
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
+              <LoadingBar/>
       <Header />
       <FrustumImageSection/>
       <RenderingPipeline />
