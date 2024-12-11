@@ -1,5 +1,7 @@
 import React from "react";
 import culling from '../assets/culling.png'
+import "prismjs/themes/prism-okaidia.css"; // Add any preferred Prism.js theme
+
 
 const Header: React.FC = () => (
   <section className="min-h-[calc(100vh-3.25rem)] bg-gradient-to-r from-green-500 to-blue-500 py-20 flex items-center">
@@ -45,51 +47,54 @@ const RenderingPipeline: React.FC = () => (
 );
 
 const SetupSection: React.FC = () => (
-<section className="py-20 bg-gray-800">
-  <div className="container mx-auto px-4">
-    <h2 className="text-3xl font-bold text-center mb-10">Setup</h2>
-    <p className="mt-4">1. Generate the necessary buffer objects:</p>
-    <ul className="list-disc list-inside mt-4 space-y-2 text-gray-300">
-      <li>
-        <strong>m_indirectDraw:</strong> Stores draw commands.
-      </li>
-      <li>
-        <strong>m_indirectDrawCopy:</strong> Used as a copy of the instances of the scene.
-      </li>
-      <li>
-        <strong>m_sizeAtomic:</strong> An atomic counter buffer for dynamic tracking of culled meshes.
-      </li>
-    </ul>
-  <pre className="bg-gray-700 p-4 rounded-md text-white">
-    {`glGenBuffers(1, &m_indirectDraw);
+  <section className="py-20 bg-gray-800">
+    <div className="container mx-auto px-4">
+      <h2 className="text-3xl font-bold text-center mb-10 text-white">Setup</h2>
+      <p className="mt-4 text-white">1. Generate the necessary buffer objects:</p>
+      <ul className="list-disc list-inside mt-4 space-y-2 text-gray-300">
+        <li><strong>m_indirectDraw:</strong> Stores draw commands.</li>
+        <li><strong>m_indirectDrawCopy:</strong> Used as a copy of the instances of the scene.</li>
+        <li><strong>m_sizeAtomic:</strong> An atomic counter buffer for dynamic tracking of culled meshes.</li>
+      </ul>
+
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+        <pre className="text-white language-cpp">
+          {`glGenBuffers(1, &m_indirectDraw);
 glGenBuffers(1, &m_indirectDrawCopy);
 glGenBuffers(1, &m_sizeAtomic);`}
-  </pre>
+        </pre>
+      </div>
 
-  <p className="mt-4">
-    2. Configure the atomic counter buffer: This buffer is bound to the GL_ATOMIC_COUNTER_BUFFER target and linked to binding point 0. The buffer size is set to hold one unsigned integer.
-  </p>
+      <p className="mt-4 text-white">
+        2. Configure the atomic counter buffer: This buffer is bound to the GL_ATOMIC_COUNTER_BUFFER target and linked to binding point 0. The buffer size is set to hold one unsigned integer.
+      </p>
 
-
-  <pre className="bg-gray-700 p-4 rounded-md text-white">
-    {`glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, m_sizeAtomic);
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+        <pre className="text-white language-cpp">
+          {`glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, m_sizeAtomic);
 glBindBufferBase(GL_ATOMIC_COUNTER_BUFFER, 0, m_sizeAtomic);
 glBufferData(GL_ATOMIC_COUNTER_BUFFER, sizeof(unsigned int), NULL, GL_DYNAMIC_DRAW);
 glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, 0);`}
-  </pre>
+        </pre>
+      </div>
 
-  <p className="mt-4">
-    3. Bind and configure the indirect draw copy buffer: This prepares the buffer to store draw commands with offsets. The offsets are calculated in the next step.
-  </p>
-  <pre className="bg-gray-700 p-4 rounded-md text-white">
-    {`glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDrawCopy);`}
-  </pre>
+      <p className="mt-4 text-white">
+        3. Bind and configure the indirect draw copy buffer: This prepares the buffer to store draw commands with offsets. The offsets are calculated in the next step.
+      </p>
 
-  <p className="mt-4">
-    4. Initialize the draw commands: Each mesh is processed to create a draw command, which specifies the number of indices, instance count, and vertex offsets for rendering. These commands are stored in a vector.
-  </p>
-  <pre className="bg-gray-700 p-4 rounded-md text-white">
-    {`m_currentIndex = 0;
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+        <pre className="text-white language-cpp">
+          {`glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDrawCopy);`}
+        </pre>
+      </div>
+
+      <p className="mt-4 text-white">
+        4. Initialize the draw commands: Each mesh is processed to create a draw command, which specifies the number of indices, instance count, and vertex offsets for rendering. These commands are stored in a vector.
+      </p>
+
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+        <pre className="text-white language-cpp">
+          {`m_currentIndex = 0;
 m_currentVertex = 0;
 
 for (const auto& mesh : meshes) {
@@ -107,13 +112,16 @@ for (const auto& mesh : meshes) {
     m_currentIndex += indices.size();
     m_currentVertex += vertices.size();
 }`}
-  </pre>
+        </pre>
+      </div>
 
-  <p className="mt-4">
-    5. Upload draw commands to buffers: The commands are uploaded to both the copy buffer and the primary indirect draw buffer for use in rendering.
-  </p>
-  <pre className="bg-gray-700 p-4 rounded-md text-white">
-    {`glBindBuffer(GL_ARRAY_BUFFER, m_indirectDrawCopy);
+      <p className="mt-4 text-white">
+        5. Upload draw commands to buffers: The commands are uploaded to both the copy buffer and the primary indirect draw buffer for use in rendering.
+      </p>
+
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+        <pre className="text-white language-cpp">
+          {`glBindBuffer(GL_ARRAY_BUFFER, m_indirectDrawCopy);
 glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_indirectCopySSBOId, m_indirectDrawCopy);
 glBufferData(GL_DRAW_INDIRECT_BUFFER, m_drawCommands.size() * sizeof(DrawElementsIndirectCommand), m_drawCommands.data(), GL_DYNAMIC_DRAW);
 
@@ -121,10 +129,12 @@ glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDraw);
 glBindBuffer(GL_ARRAY_BUFFER, m_indirectDraw);
 glBindBufferBase(GL_SHADER_STORAGE_BUFFER, m_indirectSSBOId, m_indirectDraw);
 glBufferData(GL_DRAW_INDIRECT_BUFFER, m_drawCommands.size() * sizeof(DrawElementsIndirectCommand), nullptr, GL_DYNAMIC_DRAW);`}
-  </pre>
-</div>
+        </pre>
+      </div>
+    </div>
   </section>
 );
+
 
 const ComputeShaderSection: React.FC = () => (
   <section className="py-20">
@@ -134,7 +144,9 @@ const ComputeShaderSection: React.FC = () => (
         Let's dive into the compute shader, which is the most interesting part. The compute shader uses a local size of 1 and dispatches based on the number of meshes, e.g., <code>dispatch(meshes.size(), 1, 1);</code>.
         The required SSBOs and UBOs are defined as follows:
       </p>
-      <pre className="bg-gray-700 p-4 rounded-md text-white">
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+
+      <pre className="text-white language-cpp">
         {`#version 460 core
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 
@@ -180,8 +192,12 @@ layout(std430, binding = 4) buffer AABBData {
 layout(binding = 0) uniform atomic_uint counterSize;
 `}
       </pre>
+      </div>
+
       <p className="mt-4">After gathering the data, the AABB transform function that makes the AABB data from local to model space is applied:</p>
-      <pre className="bg-gray-700 p-4 rounded-md text-white">
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+
+      <pre className="text-white language-cpp">
         {`AABB transformAABB(AABB localAABB, mat4 modelMatrix) {
     vec3 worldCenter = vec3(modelMatrix * localAABB.center);
     vec3 axisX = vec3(modelMatrix[0][0], modelMatrix[1][0], modelMatrix[2][0]);
@@ -196,8 +212,11 @@ layout(binding = 0) uniform atomic_uint counterSize;
 }
 `}
       </pre>
+      </div>
       <p className="mt-4">The frustum check function works as follows: First, we retrieve the plane normals. For each plane, we calculate the distance from the center, considering the projected radius. We then verify whether the point is within the frustum by ensuring it is not outside the projected bounds. Here's the code snippet:</p>
-      <pre className="bg-gray-700 p-4 rounded-md text-white">
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+
+      <pre className="text-white language-cpp">
         {`bool isAABBInFrustum(mat4 viewProjection, AABB worldAABB) {
     vec3 absExtents = worldAABB.extents.xyz;
 
@@ -264,8 +283,11 @@ layout(binding = 0) uniform atomic_uint counterSize;
 `}
 
       </pre>
+      </div>
       <p className="mt-4">The main will check and add to the atomic counter the data:</p>
-      <pre className="bg-gray-700 p-4 rounded-md text-white">
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+
+      <pre className="text-white language-cpp">
         {`int main(){
 
     uint index = gl_GlobalInvocationID.x;
@@ -287,6 +309,7 @@ layout(binding = 0) uniform atomic_uint counterSize;
 `}
 
       </pre>
+      </div>
     </div>
   </section>
 );
@@ -298,7 +321,9 @@ const RenderingSection: React.FC = () => (
       <p className="mt-4">
         Rendering with <code>GlMultidrawIndirectCount</code> is done as follows:
       </p>
-      <pre className="bg-gray-700 p-4 rounded-md text-white">
+      <div className="overflow-x-auto bg-gray-700 p-4 rounded-md">
+
+      <pre className="text-white language-cpp">
 {`m_vao->bind();
 glBindBuffer(GL_DRAW_INDIRECT_BUFFER, m_indirectDraw);
 glBindBuffer(GL_PARAMETER_BUFFER_ARB, m_sizeAtomic);
@@ -309,6 +334,7 @@ glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
         `}
 
       </pre>
+      </div>
     </div>
   </section>
 );
