@@ -36,11 +36,8 @@ const RenderingPipeline: React.FC = () => (
     <div className="container mx-auto px-4">
       <h2 className="text-3xl font-bold text-center mb-10">Rendering Pipeline</h2>
       <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-        In my engine, I utilize <code>glMultiDrawIndirect</code> to minimize CPU overhead by offloading the work to the GPU. When implementing frustum culling, two approaches can be used:
-        <ol className="list-decimal pl-8 mt-4">
-          <li>The less efficient method sets <code>.instanceCount</code> to 0.</li>
-          <li>The more efficient approach, which I have chosen, utilizes an atomic counter to track the number of instances to draw and uses <code>glMultiDrawIndirectCount</code>.</li>
-        </ol>
+        In my engine, I utilize <code>glMultiDrawIndirect</code> to minimize CPU overhead by offloading the work to the GPU. When implementing frustum culling, i used the
+        an efficient approach, that uses an atomic counter to track the number of instances to draw and <code>glMultiDrawIndirectCount</code>.
       </p>
     </div>
   </section>
@@ -339,15 +336,17 @@ glBindBuffer(GL_DRAW_INDIRECT_BUFFER, 0);
   </section>
 );
 
-const CullingPage: React.FC = () => (
-  <div className="min-h-screen bg-gray-900 text-white font-sans">
-    <Header />
-    <FrustumImageSection/>
-    <RenderingPipeline />
-    <SetupSection />
-    <ComputeShaderSection />
-    <RenderingSection/>
-  </div>
-);
+export default function CullingPage()
+{
 
-export default CullingPage;
+  return (
+    <div className="min-h-screen bg-gray-900 text-white font-sans">
+      <Header />
+      <FrustumImageSection/>
+      <RenderingPipeline />
+      <SetupSection />
+      <ComputeShaderSection />
+      <RenderingSection/>
+    </div>
+  );
+}
