@@ -1,8 +1,8 @@
 import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Site from "./Site";
-import ArticlesPage from "./ArticlesPage";
-import ClusteredRenderingPage from "./articles/ClusteredRendering";
-import CullingPage from "./articles/Culling";
+import Site from "../pages/Site";
+import ArticlesPage from "../pages/ArticlesPage";
+import ClusteredRenderingPage from "../articles/ClusteredRendering";
+import CullingPage from "../articles/Culling";
 
 export default function App() {
   return (

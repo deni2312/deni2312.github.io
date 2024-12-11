@@ -1,5 +1,5 @@
-import telegram from './assets/telegram.svg';
-import chatgpt from './assets/chatgpt.png';
+import telegram from '../assets/telegram.svg';
+import chatgpt from '../assets/chatgpt.png';
 import { Link } from 'react-router-dom';
 
 function Site() {

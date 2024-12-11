@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import culling from './assets/culling.png'
+import culling from '../assets/culling.png'
 
 const ArticlesPage: React.FC = () => {
   return (
