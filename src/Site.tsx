@@ -28,7 +28,7 @@ function Site() {
           </p>
           <div className="text-center mt-8">
             <Link
-              to="/deni2312.github.io/articles"
+              to="/articles"
               className="inline-block bg-gradient-to-r from-purple-500 to-blue-500 py-2 px-6 rounded-lg text-white font-semibold mt-4"
             >
               Read My Articles
