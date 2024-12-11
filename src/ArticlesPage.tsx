@@ -33,7 +33,7 @@ const ArticlesPage: React.FC = () => {
 
           {/* Read More Link to Clustered Rendering Article */}
           <Link
-            to="/deni2312.github.io/articles/culling"
+            to="/articles/culling"
             className="mt-4 inline-block text-blue-400 hover:underline"
           >
             Read More
@@ -47,7 +47,7 @@ const ArticlesPage: React.FC = () => {
               </p>
               {/* Read More Link to Clustered Rendering Article */}
               <Link
-                to="/deni2312.github.io/articles/clustered-rendering"
+                to="/articles/clustered-rendering"
                 className="mt-4 inline-block text-blue-400 hover:underline"
               >
                 Read More

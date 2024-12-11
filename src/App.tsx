@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Site from "./Site";
 import ArticlesPage from "./ArticlesPage";
 import ClusteredRenderingPage from "./articles/ClusteredRendering";
@@ -14,7 +14,7 @@ export default function App() {
             <ul className="flex space-x-4">
               <li>
                 <Link
-                  to="/deni2312.github.io/"
+                  to="/"
                   className="text-gray-300 hover:text-white"
                 >
                   Home
@@ -22,7 +22,7 @@ export default function App() {
               </li>
               <li>
                 <Link
-                  to="/deni2312.github.io/articles"
+                  to="/articles"
                   className="text-gray-300 hover:text-white"
                 >
                   Articles
@@ -34,14 +34,14 @@ export default function App() {
 
         <main>
           <Routes>
-            <Route path="/deni2312.github.io/" element={<Site />} />
-            <Route path="/deni2312.github.io/articles" element={<ArticlesPage />} />
+            <Route path="/" element={<Site />} />
+            <Route path="/articles" element={<ArticlesPage />} />
             <Route
-              path="/deni2312.github.io/articles/clustered-rendering"
+              path="/articles/clustered-rendering"
               element={<ClusteredRenderingPage />}
             />
             <Route
-              path="/deni2312.github.io/articles/culling"
+              path="/articles/culling"
               element={<CullingPage />}
             />
             <Route path="*" element={<Site />} />
