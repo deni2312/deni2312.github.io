@@ -4,8 +4,8 @@ import culling from './assets/culling.png'
 
 const ArticlesPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-gray-900 text-white font-sans">
-      <header className="bg-gradient-to-r from-green-500 to-blue-500 py-20">
+    <div className="bg-gray-900 text-white font-sans">
+      <section className="min-h-[calc(100vh-3.25rem)] bg-gradient-to-r from-green-500 to-blue-500 py-20 flex items-center">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold">Articles</h1>
           <p className="mt-4 text-lg md:text-2xl">
@@ -13,9 +13,9 @@ const ArticlesPage: React.FC = () => {
             graphics design.
           </p>
         </div>
-      </header>
+      </section>
 
-      <section className="py-20">
+      <section className="min-h-[calc(100vh-3.25rem)] py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-10">Recent Posts</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
