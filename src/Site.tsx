@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 function Site() {
   return (
-    <div className="min-h-[calc(100vh-4rem)] bg-gray-900 text-white font-sans">
+    <div className="bg-gray-900 text-white font-sans">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-500 to-blue-500  min-h-[calc(100vh-6vh)] flex items-center">
+      <section className="bg-gradient-to-r from-purple-500 to-blue-500 min-h-[calc(100vh-3.5rem)] flex items-center">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold">
             Welcome to My Portfolio
@@ -86,7 +86,7 @@ function Site() {
       </section>
 
       {/* Contact Section */}
-      <section className="min-h-[calc(100vh-4vh)] flex items-center">
+      <section className="min-h-[calc(100vh-3.25rem)] flex items-center">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-10">Get in Touch</h2>
           <form className="max-w-xl mx-auto">
