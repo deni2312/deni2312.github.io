@@ -3,11 +3,13 @@ import Site from "../pages/Site";
 import ArticlesPage from "../pages/ArticlesPage";
 import ClusteredRenderingPage from "../articles/ClusteredRendering";
 import CullingPage from "../articles/Culling";
+import LoadingBar from "./BarComponent";
 
 export default function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-900 text-white">
+        <LoadingBar/>
         <header className="bg-gray-800 py-4">
           <nav className="container mx-auto px-4 flex justify-between items-center">
             <h1 className="text-lg font-bold text-white">My Portfolio</h1>

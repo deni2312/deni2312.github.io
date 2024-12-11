@@ -1,7 +1,6 @@
 import React from "react";
 import culling from '../assets/culling.png'
-import "prismjs/themes/prism-okaidia.css"; // Add any preferred Prism.js theme
-
+import "prismjs/themes/prism-okaidia.css";
 
 const Header: React.FC = () => (
   <section className="min-h-[calc(100vh-3.25rem)] bg-gradient-to-r from-green-500 to-blue-500 py-20 flex items-center">
