@@ -1,6 +1,7 @@
 import React from "react";
 import culling from '../assets/culling.png'
 import "prismjs/themes/prism-okaidia.css";
+import LoadingBar from "../components/BarComponent";
 
 const Header: React.FC = () => (
   <section className="min-h-[calc(100vh-3.25rem)] bg-gradient-to-r from-green-500 to-blue-500 py-20 flex items-center">
@@ -340,7 +341,7 @@ export default function CullingPage()
 
   return (
     <div className="min-h-screen bg-gray-900 text-white font-sans">
-              <LoadingBar/>
+      <LoadingBar/>
       <Header />
       <FrustumImageSection/>
       <RenderingPipeline />
