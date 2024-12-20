@@ -3,10 +3,15 @@ import Site from "../pages/Site";
 import ArticlesPage from "../pages/ArticlesPage";
 import ClusteredRenderingPage from "../articles/ClusteredRendering";
 import CullingPage from "../articles/Culling";
+import prism from '../assets/prism.png'
+import { Helmet } from "react-helmet";
 
 export default function App() {
   return (
     <Router>
+      <Helmet>
+        <link rel="icon" type="image/png" href={prism} sizes="16x16" />
+      </Helmet>
       <div className="min-h-screen bg-gray-900 text-white">
         <header className="bg-gray-800 py-4">
           <nav className="container mx-auto px-4 flex justify-between items-center">
