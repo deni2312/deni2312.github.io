@@ -36,8 +36,8 @@ const RenderingPipeline: React.FC = () => (
     <div className="container mx-auto px-4">
       <h2 className="text-3xl font-bold text-center mb-10">Rendering Pipeline</h2>
       <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-        In my engine, I utilize <code>glMultiDrawIndirect</code> to minimize CPU overhead by offloading the work to the GPU. When implementing frustum culling, i used the
-        an efficient approach, that uses an atomic counter to track the number of instances to draw and <code>glMultiDrawIndirectCount</code>.
+        In my engine, I use <code>glMultiDrawIndirect</code> to minimize CPU overhead by offloading the work to the GPU. When implementing frustum culling, i used the 
+        following approach: first i fill a SSBO with the indirect buffer data, then i create another SSBO with culled data, this buffer will be the one that will be displayed, to count the instances i use an atomic counter and to draw i use <code>glMultiDrawIndirectCount</code>.
       </p>
     </div>
   </section>
