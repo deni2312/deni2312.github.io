@@ -307,6 +307,7 @@ layout(binding = 0) uniform atomic_uint counterSize;
 
       </pre>
       </div>
+      <p>The whole code is on the prisma engine page, there you will see that i also create an SSBO that contains the ids of culled meshes, i use it to identify the culled meshes in other shaders, in fact each <code>gl_DrawID</code> corresponds to <code>ids[gl_DrawID]</code></p>
     </div>
   </section>
 );
