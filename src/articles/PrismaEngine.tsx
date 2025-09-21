@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const PrismaEngine: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="bg-gray-900 text-white font-sans">
       {/* Header */}
