@@ -84,56 +84,6 @@ function Site() {
           </div>
         </div>
       </section>
-
-      {/* Contact Section */}
-      <section className="min-h-[calc(100vh-3.25rem)] flex items-center">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-10">Get in Touch</h2>
-          <form className="max-w-xl mx-auto">
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2" htmlFor="name">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-gray-300"
-                placeholder="Your Name"
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium mb-2" htmlFor="email">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-gray-300"
-                placeholder="Your Email"
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-sm font-medium mb-2"
-                htmlFor="message"
-              >
-                Message
-              </label>
-              <textarea
-                id="message"
-                className="w-full px-4 py-2 border border-gray-600 rounded-lg bg-gray-800 text-gray-300"
-                placeholder="Your Message"
-              ></textarea>
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-purple-500 to-blue-500 py-2 px-4 rounded-lg text-white font-bold"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
-      </section>
     </div>
   );
 }
