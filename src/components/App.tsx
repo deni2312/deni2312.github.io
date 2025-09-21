@@ -15,7 +15,7 @@ export default function App() {
       <div className="min-h-screen bg-gray-900 text-white">
         <header className="bg-gray-800 py-4">
           <nav className="container mx-auto px-4 flex justify-between items-center">
-            <h1 className="text-lg font-bold text-white">My Portfolio</h1>
+            <h1 className="text-lg font-bold text-white">Beqiraj Denis</h1>
             <ul className="flex space-x-4">
               <li>
                 <Link
