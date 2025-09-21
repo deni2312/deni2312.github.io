@@ -1,7 +1,7 @@
 import { HashRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Site from "../pages/Site";
 import ArticlesPage from "../pages/ArticlesPage";
-import ClusteredRenderingPage from "../articles/ClusteredRendering";
+import PrismaEngine from "../articles/PrismaEngine";
 import CullingPage from "../articles/Culling";
 import prism from '../assets/prism.png'
 import { Helmet } from "react-helmet";
@@ -42,8 +42,8 @@ export default function App() {
             <Route path="/" element={<Site />} />
             <Route path="/articles" element={<ArticlesPage />} />
             <Route
-              path="/articles/clustered-rendering"
-              element={<ClusteredRenderingPage />}
+              path="/articles/PrismaEngine"
+              element={<PrismaEngine />}
             />
             <Route
               path="/articles/culling"
