@@ -1,32 +1,51 @@
 import React from "react";
-import culling from '../assets/culling.png'
+import { motion } from "framer-motion"; // ✅ import motion
+import culling from "../assets/culling.png";
 import "prismjs/themes/prism-okaidia.css";
 import LoadingBar from "../components/BarComponent";
 
 const Header: React.FC = () => (
   <section className="min-h-[calc(100vh-3.25rem)] bg-gradient-to-r from-green-500 to-blue-500 py-20 flex items-center">
-  <div className="container mx-auto px-4 text-center">
-    <h1 className="text-4xl md:text-6xl font-bold">Frustum Culling</h1>
-    <p className="mt-4 text-lg md:text-2xl">
-    Frustum culling is a 3D graphics optimization technique that discards objects outside the camera's view frustum. This reduces unnecessary computational load by rendering only visible objects.
-    </p>
-  </div>
-</section>
+    <div className="container mx-auto px-4 text-center">
+      <motion.h1
+        className="text-4xl md:text-6xl font-bold"
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        Frustum Culling
+      </motion.h1>
+
+      <motion.p
+        className="mt-4 text-lg md:text-2xl"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+      >
+        Frustum culling is a 3D graphics optimization technique that discards
+        objects outside the camera&apos;s view frustum. This reduces unnecessary
+        computational load by rendering only visible objects.
+      </motion.p>
+    </div>
+  </section>
 );
 
 // New section for displaying the image (frustum.png)
 const FrustumImageSection: React.FC = () => (
   <section className="py-20 bg-gray-800">
     <div className="container mx-auto px-4 text-center">
-      <h2 className="text-3xl font-bold text-center mb-10">Prisma Engine: Frustum Culling</h2>
+      <h2 className="text-3xl font-bold text-center mb-10">
+        Prisma Engine: Frustum Culling
+      </h2>
       <p className="text-lg text-gray-300 mb-8">
-        This image provides a visual overview of frustum culling in Prisma Engine:
+        This image provides a visual overview of frustum culling in Prisma
+        Engine:
       </p>
       <img
-          src={culling}
-          alt="Frustum Culling"
-          className="rounded-lg mb-4 object-contain max-w-full mx-auto"
-        />
+        src={culling}
+        alt="Frustum Culling"
+        className="rounded-lg mb-4 object-contain max-w-full mx-auto"
+      />
     </div>
   </section>
 );

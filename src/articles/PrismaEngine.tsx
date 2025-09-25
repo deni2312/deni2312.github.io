@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
+import LoadingBar from "../components/BarComponent";
 
 const PrismaEngine: React.FC = () => {
   useEffect(() => {
@@ -7,7 +8,10 @@ const PrismaEngine: React.FC = () => {
   }, []);
 
   return (
+    
     <div className="bg-gray-900 text-white font-sans overflow-hidden">
+      <LoadingBar/>
+    
       {/* Header */}
       <header className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-r from-green-500 to-blue-500 px-4 text-center">
         <motion.h1
