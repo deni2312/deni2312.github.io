@@ -47,9 +47,11 @@ function Site() {
             transition={{ duration: 1 }}
             viewport={{ once: true }}
           >
-            With over 5 years of experience in OpenGL, Unity, and Unreal Engine 5, I specialize in crafting real-time rendering engines, shaders, and other cool graphics programming stuff.
-            You can also check out my GitHub for other projects, including work with the Telegram API and ChatGPT integrations, all written in my favorite language, C++.
-            I'm also highly proficient in languages like Java, Python, and TypeScript, working with frameworks such as Angular, React, and Three.js. I have experience in mobile development using Flutter, as well as expertise in Docker and setting up CI/CD pipelines.
+            With over 8 years of experience in both desktop and mobile development, I specialize in building high-performance applications. My work spans technologies such as Flutter for mobile development, as well as OpenGL, Unity, and Unreal Engine 5 for immersive visual experiences.
+
+            You can explore more of my projects on GitHub, where I have C++ Telegram API integrations, ChatGPT extensions, Flutter apps and more!
+
+            I’m also proficient in Java, Python, and TypeScript, with hands-on experience using modern frameworks like Angular, React, and Three.js. In addition, I’m well-versed in Docker and CI/CD pipeline setup for efficient deployment and automation.
           </motion.p>
           <motion.div
             className="text-center mt-8"
