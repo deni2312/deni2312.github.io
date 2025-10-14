@@ -23,8 +23,7 @@ function Site() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
           >
-            I'm a computer graphics programmer who loves exploring the complexity of visuals and experimenting with innovative rendering techniques.
-          </motion.p>
+            I'm a software engineer passionate about building high-performance applications and exploring new ways to optimize cross-platform experiences.          </motion.p>
         </div>
       </section>
 
