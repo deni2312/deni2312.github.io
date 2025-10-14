@@ -89,6 +89,12 @@ function Site() {
                 link: 'https://github.com/deni2312/prisma-engine',
               },
               {
+                title: 'ComfyUI App',
+                img: 'https://github.com/deni2312/ComfyUIMobileApp/blob/main/assets/comfy_icon.png?raw=true',
+                desc: 'ComfyUI App is a Flutter-based Android application that serves as an unofficial client for the ComfyUI platform.',
+                link: 'https://github.com/deni2312/ComfyUIMobileApp',
+              },
+              {
                 title: 'Telegram Bot API',
                 img: telegram,
                 desc: 'This is a C++ library for interacting with the Telegram Bot API. It provides a simple and convenient way to send and receive messages, manage chats and users, and perform other bot-related tasks.',
